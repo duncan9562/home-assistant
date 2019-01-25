@@ -1,0 +1,12 @@
+  front_camera:
+    name: "Front garden camera"
+    initial: off
+    icon: mdi:cctv
+  lounge_camera:
+    name: "Lounge camera"
+    initial: off
+    icon: mdi:cctv
+  dining_room_camera:
+    name: "Dining room camera"
+    initial: off
+    icon: mdi:cctv

@@ -1,0 +1,13 @@
+## Outdoor light timers ##
+  - alias: "Christmas lights (outside) ON at sunset (+30mins)"
+    initial_state: true
+    trigger:
+      platform: sun
+      event: sunset
+      offset: +00:30:00
+    action:
+      - service: switch.turn_on
+        entity_id:   switch.christmas_lights_outside_front_tree
+    #   - service: notify.Pushbullet
+    #     data:
+    #       message: "Outside Christmas lights turned ON."

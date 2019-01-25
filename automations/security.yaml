@@ -1,0 +1,95 @@
+# CCTV Motion detection
+  - alias: "Front CCTV motion detect (at home)"
+    initial_state: true
+    hide_entity: false
+    trigger:
+      platform: state
+      entity_id: input_boolean.front_camera
+      from: 'off'
+      to: 'on'
+    condition:
+      condition: and
+      conditions:
+        - condition: time
+          after: '07:00:00'
+          before: '23:00:00'
+        - condition: template
+          value_template: >
+            {% if is_state('device_tracker.duncan', 'home') %}
+              true
+            {% elif is_state('device_tracker.beth', 'home') %}
+              true
+            {% else %}
+              false
+            {% endif %}
+    action:
+      - service: media_player.volume_set
+        data_template:
+          entity_id: media_player.living_room_speaker
+          volume_level: 0.5
+      - service: tts.google_say
+        data_template:
+          entity_id: media_player.living_room_speaker
+          message: 'Movement detected in the front garden.' 
+      - service: notify.Pushbullet
+        data:
+          message: "Movement deteced in the front garden!"          
+ 
+  - alias: "Front CCTV motion detect (not at home)"
+    initial_state: true
+    hide_entity: false
+    trigger:
+      platform: state
+      entity_id: input_boolean.front_camera
+      from: 'off'
+      to: 'on'
+    condition:
+      condition: template
+      value_template: >
+        {% if is_state('device_tracker.duncan', 'away') %}
+          true
+        {% elif is_state('device_tracker.beth', 'away') %}
+          true
+        {% else %}
+          false
+        {% endif %}
+    action:
+      - service: notify.Pushbullet
+        data_template:
+          title: 'test'
+          message: 'test' 
+      - service: notify.Pushbullet
+        data:
+          message: "Movement deteced in the front garden!"
+          
+# Alarm conditions
+  - alias: "Alarm set"
+    initial_state: true
+    trigger:
+      - platform: state
+        entity_id: device_tracker.duncan
+        from: 'home'
+        to: 'away'
+        for: 
+          minutes: 5
+      - platform: state
+        entity_id: device_tracker.duncan
+        from: 'home'
+        to: 'away'
+        for: 
+          minutes: 5
+    condition:
+      condition: and
+      conditions:
+        - condition: state
+          entity_id: device_tracker.duncan
+          state: 'away'
+        - condition: state
+          entity_id: device_tracker.beth
+          state: 'away'
+    action:
+      - service: alarm_control_panel.alarm_arm_away
+        entity_id: alarm_control_panel.house_alarm
+      - service: notify.Pushbullet
+        data:
+          message: "The alarm is set!"

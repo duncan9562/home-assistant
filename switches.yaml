@@ -1,0 +1,24 @@
+  - platform: tplink
+    host: 192.168.0.23
+    name: Christmas lights outside (Front tree)
+
+  - platform: tplink
+    host: 192.168.0.24
+    name: Stair lights
+
+  - platform: tplink
+    host: 192.168.0.35
+    name: Kitchen cupboard lights
+
+  - platform: tplink
+    host: 192.168.0.37
+    name: Bathroom heater
+
+  - platform: tplink
+    host: 192.168.0.43
+    name: Christmas tree lights
+    
+  - platform: tplink
+    host: 192.168.0.44
+    name: Lounge lamp
+

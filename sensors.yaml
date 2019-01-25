@@ -1,0 +1,56 @@
+  - platform: yr
+    name: Weather
+    forecast: 72
+    monitored_conditions:
+      - temperature
+      - symbol
+      - precipitation
+      - windSpeed
+      - pressure
+      - windDirection
+      - humidity
+      - fog
+      - cloudiness
+      - lowClouds
+      - mediumClouds
+      - highClouds
+      - dewpointTemperature
+      
+  - platform: template
+    sensors:
+      front_camera:
+        friendly_name: "Front garden camera"
+        value_template: >-
+          {% if is_state('sensor.front_camera', 'off') %}
+            off
+          {% elif is_state('switch.front_camera', 'on') %}
+            on
+          {% else %}
+            off
+          {% endif %}
+      lounge_camera:
+        friendly_name: "Lounge camera"
+        value_template: >-
+          {% if is_state('sensor.front_camera', 'off') %}
+            off
+          {% elif is_state('switch.front_camera', 'on') %}
+            on
+          {% else %}
+            off
+          {% endif %} 
+      dining_room_camera:
+        friendly_name: "Dining room camera"
+        value_template: >-
+          {% if is_state('sensor.front_camera', 'off') %}
+            off
+          {% elif is_state('switch.front_camera', 'on') %}
+            on
+          {% else %}
+            off
+          {% endif %}   
+          
+  - platform: speedtest
+    monitored_conditions:
+      - ping
+      - download
+      - upload

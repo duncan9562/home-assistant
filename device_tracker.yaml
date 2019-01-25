@@ -1,0 +1,9 @@
+  - platform: nmap_tracker
+    hosts: 192.168.0.0/24
+    new_device_defaults:
+      track_new_devices: false
+     
+  - platform: ping
+    hosts:
+      duncan_phone_ping: 192.168.0.13
+      beth_phone_ping: 192.168.0.40

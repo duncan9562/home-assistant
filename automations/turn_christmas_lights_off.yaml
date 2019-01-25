@@ -1,0 +1,12 @@
+## Turn of ALL lights ##
+  - alias: "Turn all Christmas lights off"
+    initial_state: true
+    trigger:
+      platform: time
+      at: '23:00:00'
+    action:
+      - service: switch.turn_off
+        entity_id: group.christmas_lights
+    #   - service: notify.Pushbullet
+    #     data:
+    #       message: "All Christmas lights turned OFF."

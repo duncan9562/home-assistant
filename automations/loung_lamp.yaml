@@ -1,0 +1,12 @@
+## Loung lamp timer ##
+  - alias: "Loung lamp timer"
+    initial_state: false
+    trigger:
+      - platform: time
+        at: '18:00:00'
+    action:
+      - service: switch.turn_on
+        entity_id:   switch.loung_lamp
+      - delay: 04:00:00
+      - service: switch.turn_off
+        entity_id:   switch.loung_lamp      

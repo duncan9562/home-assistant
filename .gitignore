@@ -1,0 +1,31 @@
+.uuid
+.HA_VERSION
+*.log
+*.db
+*.db-*
+*~
+
+# Directories
+deps
+tts
+keys
+
+# Files
+.DS_Store
+.HA_VERSION
+._.DS_Store
+.cloud
+.storage
+.uuid
+*.log
+*.db
+*.db-*
+*~
+
+# Config files
+known_devices.yaml
+plex.conf
+secrets.yaml
+home-panel-config.json
+
+

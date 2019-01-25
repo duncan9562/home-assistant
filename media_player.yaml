@@ -1,0 +1,9 @@
+  - platform: firetv
+    name: "FireTV Stick (Lounge)"
+    host: 192.168.0.30
+    adbkey: "/config/keys/lounge_firetv"
+    
+  - platform: firetv
+    name: "FireTV Stick (Bedroom)"
+    host: 192.168.0.17
+    adbkey: "/config/keys/bedroom_firetv"

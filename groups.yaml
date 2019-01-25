@@ -1,0 +1,110 @@
+  default_view:
+    name: Main
+    view: yes
+    entities:
+      - group.all_automations
+      - group.all_switches
+      - group.all_scripts
+      - sun.sun
+      - group.device_tracker
+      - alarm_control_panel.home_alarm
+      - group.weather
+      - group.cctv_motion
+      - group.speedtest
+ 
+  media_device:
+    name: "Media Devices"
+    view: Yes
+    entities:
+      - group.media_devices
+
+  xiaomi_devices:
+    name: "Xiaomi Devices"
+    view: yes
+    entities:
+      - binary_sensor.door_window_sensor_158d0002b5b396
+      - binary_sensor.door_window_sensor_158d0002b7b04c
+      - binary_sensor.switch_158d0001e88780
+      - binary_sensor.switch_158d00021326f8
+      - light.gateway_light_7c49ebb0b34b
+      - sensor.humidity_158d00027310fb
+      - sensor.pressure_158d00027310fb
+      - sensor.temperature_158d00027310fb
+      - sensor.illumination_7c49ebb0b34b  
+  
+  
+  christmas_lights:
+    name: "Christmas Lights"
+    view: no
+    entities:
+      - switch.christmas_lights_outside_front_tree
+      - switch.christmas_tree_lights
+      
+  duncan_phone:
+    name: "Duncan Phone"
+    view: no
+    entities:
+      - device_tracker.duncan
+      - device_tracker.duncan_phone_ping
+      
+  beth_phone:
+    name: "Beth Phone"
+    view: no
+    entities:
+      - device_tracker.beth
+      - device_tracker.beth_phone_ping
+      
+  device_tracker:
+    name: "Device Tracker"
+    view: no
+    entities:
+      - group.beth_phone
+      - group.duncan_phone
+      
+  weather:
+    name: "Weather"
+    view: no
+    entities:
+      - sensor.weather_temperature
+      - sensor.weather_symbol
+      - sensor.weather_precipitation
+      - sensor.weather_windSpeed
+      - sensor.weather_pressure
+      - sensor.weather_windDirection
+      - sensor.weather_humidity
+      - sensor.weather_fog
+      - sensor.weather_cloudiness
+      
+  cctv_motion:
+    name: "CCTV motion detection"
+    view: no
+    icon: mdi:cctv
+    entities:
+      - input_boolean.front_camera
+      - input_boolean.dining_room_camera
+      - input_boolean.lounge_camera
+      
+  speedtest:
+    name: Speedtest
+    view: no
+    icon: mdi:speedometer
+    entities:
+      - sensor.speedtest_download
+      - sensor.speedtest_upload
+      - sensor.speedtest_ping
+      
+  media_devices:
+    name: "Media Devices"
+    view: no
+    entities:
+      - media_player.firetv_stick_bedroom
+      - media_player.firetv_stick_lounge
+      
+  indoor_switches:
+    name: "Indoor switches"
+    view: no
+    entities:
+      - switch.bathroom_heater
+      - switch.kitchen_cupboard_lights
+      - switch.lounge_lamp
+      - switch.stair_lights
