@@ -12,6 +12,9 @@ homeassistant:
   time_zone: Europe/London
   # Customization file
   customize: !include customize.yaml
+  
+recorder:
+  db_url: !secret database_string
 
 # Show links to resources in log and frontend
 introduction:
@@ -59,11 +62,6 @@ map:
 # Track the sun
 sun:
 
-# Sensors
-sensor:
-  # Weather prediction
-  - platform: yr
-
 # Text to speech
 tts:
   - platform: google
@@ -97,7 +95,7 @@ xiaomi_aqara:
  discovery_retry: 5
  gateways:
  - mac: !secret xiaomi_mac
-   key: !secret xiamoi_pass
+   key: !secret xiamoi_key
 
 # Alarm Control Panel
 alarm_control_panel: !include alarm_control_panel.yaml
