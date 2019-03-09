@@ -99,6 +99,7 @@
     entities:
       - media_player.firetv_stick_bedroom
       - media_player.firetv_stick_lounge
+      - media_player.yamaha_amp
       
   indoor_switches:
     name: "Indoor switches"

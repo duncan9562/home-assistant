@@ -31,7 +31,7 @@
         data_template:
           entity_id: media_player.living_room_speaker
           message: 'Movement detected in the front garden.' 
-      - service: notify.Pushbullet
+      - service: notify.pushbullet
         data:
           message: "Movement deteced in the front garden!"          
  
@@ -54,11 +54,7 @@
           false
         {% endif %}
     action:
-      - service: notify.Pushbullet
-        data_template:
-          title: 'test'
-          message: 'test' 
-      - service: notify.Pushbullet
+      - service: notify.pushbullet
         data:
           message: "Movement deteced in the front garden!"
           
@@ -73,23 +69,67 @@
         for: 
           minutes: 5
       - platform: state
-        entity_id: device_tracker.duncan
+        entity_id: device_tracker.beth
         from: 'home'
         to: 'away'
         for: 
           minutes: 5
     condition:
-      condition: and
-      conditions:
-        - condition: state
-          entity_id: device_tracker.duncan
-          state: 'away'
-        - condition: state
-          entity_id: device_tracker.beth
-          state: 'away'
+      condition: template
+      value_template: >
+        {% if is_state('device_tracker.duncan', 'away') %}
+          true
+        {% elif is_state('device_tracker.beth', 'away') %}
+          true
+        {% else %}
+          false
+        {% endif %}          
     action:
       - service: alarm_control_panel.alarm_arm_away
-        entity_id: alarm_control_panel.house_alarm
-      - service: notify.Pushbullet
+        data:
+          entity_id: alarm_control_panel.ha_alarm
+          code: !secret alarm_code
+      - service: notify.pushbullet
         data:
           message: "The alarm is set!"
+ 
+  - alias: "Alarm unset"
+    initial_state: true
+    trigger:
+      - platform: state
+        entity_id: device_tracker.duncan
+        from: 'away'
+        to: 'home'
+      - platform: state
+        entity_id: device_tracker.duncan
+        from: 'away'
+        to: 'home'
+    action:
+      - service: alarm_control_panel.alarm_disarm
+        data:
+          entity_id: alarm_control_panel.ha_alarm
+          code: !secret alarm_code
+
+          
+# Alarm triggers
+  - alias: "Alarm (Door sensors)"
+    initial_state: false
+    trigger:
+      - platform: state
+        entity_id: binary_sensor.door_window_sensor_158d0002b5b396
+        from: 'off'
+        to: 'on'
+      - platform: state
+        entity_id: binary_sensor.door_window_sensor_158d0002b7b04c
+        from: 'off'
+        to: 'on'
+    condition:
+      condition: state
+      entity_id: alarm_control_panel.home_alarm
+      state: armed_away
+    action:
+      - delay: 00:00:30
+      - service: notify.pushbullet
+        data:
+          message: "The alarm has been triggered!"
+         
